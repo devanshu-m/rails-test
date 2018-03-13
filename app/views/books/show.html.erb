@@ -7,7 +7,7 @@
 
 <p>
   <strong>Author:</strong>
-  <%= @book.author %>
+  <%= @book.author.email %>
 </p>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
