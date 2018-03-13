@@ -6,7 +6,11 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    if params[:author_id].present?
+      @books = Book.by_name(params[:author_id])
+    else
+      @books = Book.all
+    end
   end
 
   # GET /books/1
