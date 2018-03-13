@@ -77,7 +77,7 @@ class BooksController < ApplicationController
     def authors_only
       @book = Book.find(params[:id])
       if current_author != @book.author
-        redirect_to books_path
+        redirect_to books_path, alert: "You don't have access to this action"
       end
     end
 end

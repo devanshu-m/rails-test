@@ -1,13 +1,11 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Books</h1>
 
-<table>
+<table class="hoverTable">
   <thead>
     <tr>
       <th>Title</th>
       <th>Author</th>
-      <th colspan="3"></th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
 
@@ -17,8 +15,10 @@
         <td><%= book.title %></td>
         <td><%= book.author.email %></td>
         <td><%= link_to 'Show', book %></td>
-        <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_author == book.author %>
+          <td><%= link_to 'Edit', edit_book_path(book) %></td>
+          <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>
