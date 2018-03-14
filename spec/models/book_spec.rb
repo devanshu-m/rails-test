@@ -9,18 +9,18 @@ RSpec.describe Book, type: :model do
 	end
 
 	it "fetches books for specified author" do
-		author1 = FactoryGirl.create(:author)
-		author2 = FactoryGirl.create(:author)
-		book1 = FactoryGirl.create(:book, author: author1)
-		book2 = FactoryGirl.create(:book, author: author2)
-		book3 = FactoryGirl.create(:book, author: author1)
+		author1 = FactoryBot.create(:author)
+		author2 = FactoryBot.create(:author)
+		book1 = FactoryBot.create(:book, author: author1)
+		book2 = FactoryBot.create(:book, author: author2)
+		book3 = FactoryBot.create(:book, author: author1)
 
 		expect(Book.by_name(author1.id)).to eq([book1, book3])
 	end
 
 	it "creates citation for book" do
-		author = FactoryGirl.create(:author)
-		book1 = FactoryGirl.create(:print_book, title: 'Some title', author: author)
+		author = FactoryBot.create(:author)
+		book1 = FactoryBot.create(:print_book, title: 'Some title', author: author)
 
 		expect(book1.print_citation).to eq("Doe, John. <em>Some title</em>. 
 			New York: Big publisher, 
@@ -28,8 +28,8 @@ RSpec.describe Book, type: :model do
 	end
 
 	it "creates citation for online book" do
-		author = FactoryGirl.create(:author)
-		book2 = FactoryGirl.create(:online_book, title: 'Title two', author: author)
+		author = FactoryBot.create(:author)
+		book2 = FactoryBot.create(:online_book, title: 'Title two', author: author)
 	
 		expect(book2.online_citation).to eq("Doe, John. <em>Title two</em>.
 			New York: Big publisher,
@@ -38,8 +38,8 @@ RSpec.describe Book, type: :model do
 	end
 
 	it "creates citation for database book" do
-		author = FactoryGirl.create(:author)
-		book3 = FactoryGirl.create(:database_book, title: 'Title three', author: author)
+		author = FactoryBot.create(:author)
+		book3 = FactoryBot.create(:database_book, title: 'Title three', author: author)
 		
 		expect(book3.database_citation).to eq("Doe, John. <em>Title three</em>.
 			New York: Big publisher,

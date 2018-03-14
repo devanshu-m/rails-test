@@ -46,7 +46,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'spring-commands-rspec'
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
 end
 
 group :development do

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 	factory :book do
 		sequence(:title) { |n| "Book number #{n}"}
 		city 'New York'

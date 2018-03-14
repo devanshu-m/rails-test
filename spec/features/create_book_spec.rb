@@ -5,7 +5,7 @@ require_relative '../support/log_in_form'
 feature 'create new book' do
 	let(:new_book_form) { NewBookForm.new }
 	let(:log_in_form) { LogInForm.new }
-	let(:author) { FactoryGirl.create(:author) }
+	let(:author) { FactoryBot.create(:author) }
 
 	background do
 		log_in_form.visit_page.log_in_as(author)

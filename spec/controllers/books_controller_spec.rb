@@ -11,7 +11,7 @@ describe BooksController, type: :controller do
 		end
 
 		describe "GET show" do
-			let(:book) { FactoryGirl.create(:book, author: author) }
+			let(:book) { FactoryBot.create(:book, author: author) }
 
 			it "renders :show template" do
 				get :show, params: { id: book }
@@ -26,8 +26,8 @@ describe BooksController, type: :controller do
 	end
 
 	describe "guest user" do
-		let(:author) { FactoryGirl.create(:author) }
-		let(:book) { FactoryGirl.create(:book, author: author) }
+		let(:author) { FactoryBot.create(:author) }
+		let(:book) { FactoryBot.create(:book, author: author) }
 
 		it_behaves_like "guest view for books"
 
@@ -40,7 +40,7 @@ describe BooksController, type: :controller do
 
 		describe "POST create" do
 			it "redirects to log in page" do
-				post :create, params: { book: FactoryGirl.attributes_for(:book) }
+				post :create, params: { book: FactoryBot.attributes_for(:book) }
 				expect(response).to redirect_to(new_author_session_url)
 			end
 		end
@@ -54,7 +54,7 @@ describe BooksController, type: :controller do
 
 		describe "PUT update" do
 			it "redirects to log in page" do
-				put :update, params: { id: book, book: FactoryGirl.attributes_for(:book) }
+				put :update, params: { id: book, book: FactoryBot.attributes_for(:book) }
 				expect(response).to redirect_to(new_author_session_url)
 			end
 		end
@@ -68,7 +68,7 @@ describe BooksController, type: :controller do
 	end
 
 	describe "authenticated author" do
-		let(:author) { FactoryGirl.create(:author) }
+		let(:author) { FactoryBot.create(:author) }
 		before do
 			sign_in(author)
 		end
@@ -89,7 +89,7 @@ describe BooksController, type: :controller do
 
 		describe "POST create" do
 			context "valid data" do
-				let(:valid_data) { FactoryGirl.attributes_for(:book) }
+				let(:valid_data) { FactoryBot.attributes_for(:book) }
 
 				it "redirects to books#show" do
 					post :create, params: { book: valid_data, author_id: author }
@@ -104,7 +104,7 @@ describe BooksController, type: :controller do
 			end
 
 			context "invalid data" do
-				let(:invalid_data) { FactoryGirl.attributes_for(:book, title: '') }
+				let(:invalid_data) { FactoryBot.attributes_for(:book, title: '') }
 
 				it "renders :new template" do
 					post :create, params: { book: invalid_data }
@@ -120,31 +120,31 @@ describe BooksController, type: :controller do
 		end
 
 		context "has not written the book" do
-			let(:author1) { FactoryGirl.create(:author, first_name: "Jane") }
+			let(:author1) { FactoryBot.create(:author, first_name: "Jane") }
 			describe "GET edit" do
 				it "redirects to books page" do
-					get :edit, params: { id: FactoryGirl.create(:book, author: author1) }
+					get :edit, params: { id: FactoryBot.create(:book, author: author1) }
 					expect(response).to redirect_to(books_path)
 				end
 			end
 
 			describe "PUT update" do
 				it "redirects to books page" do
-					put :update, params: { id: FactoryGirl.create(:book, author: author1), book: FactoryGirl.attributes_for(:book) }
+					put :update, params: { id: FactoryBot.create(:book, author: author1), book: FactoryBot.attributes_for(:book) }
 					expect(response).to redirect_to(books_path)
 				end
 			end
 
 			describe "DELETE destroy" do
 				it "redirects to books page" do
-					delete :destroy, params: { id: FactoryGirl.create(:book, author: author1) }
+					delete :destroy, params: { id: FactoryBot.create(:book, author: author1) }
 					expect(response).to redirect_to(books_path)
 				end
 			end
 		end
 
 		context "has written the book" do
-			let(:book) { FactoryGirl.create(:book, author: author) }
+			let(:book) { FactoryBot.create(:book, author: author) }
 
 			describe "GET edit" do
 				it "renders :edit template" do
@@ -160,7 +160,7 @@ describe BooksController, type: :controller do
 
 			describe "PUT update" do
 				context "valid data" do
-					let(:valid_data) { FactoryGirl.attributes_for(:book, title: "Updated title") }
+					let(:valid_data) { FactoryBot.attributes_for(:book, title: "Updated title") }
 
 					it "redirects to books#show" do
 						put :update, params: { id: book, book: valid_data }
@@ -175,7 +175,7 @@ describe BooksController, type: :controller do
 				end
 
 				context "invalid data" do
-					let(:invalid_data) { FactoryGirl.attributes_for(:book, title: "") }
+					let(:invalid_data) { FactoryBot.attributes_for(:book, title: "") }
 
 					it "renders :edit template" do
 						put :update, params: { id: book, book: invalid_data, author: "New author" }
