@@ -1,4 +1,52 @@
-<%= form_with(model: book, local: true) do |form| %>
+<style>
+  .book_website_title, .book_database_name, .book_accessed_date
+  {
+    display: none;
+  }
+</style>
+
+<script>
+  $(document).ready(function() {
+    if($('#book_type_of_book').val() == "Online book"){
+      $(".book_website_title").show();
+      $(".book_accessed_date").show();
+    }
+
+    if($('#book_type_of_book').val() == "Database book"){
+      $(".book_database_name").show();
+      $(".book_accessed_date").show();
+    }
+
+  $('#book_type_of_book').change(function() {
+      if ($(this).val() == "Online book"){
+        $(".book_website_title").show();
+      }
+      else{
+        $(".book_website_title").hide();
+      }
+  });
+
+  $('#book_type_of_book').change(function() {
+      if ($(this).val() == "Database book"){
+        $(".book_database_name").show();
+      }
+      else{
+        $(".book_database_name").hide();
+      }
+  });
+
+  $('#book_type_of_book').change(function() {
+      if ($(this).val() == "Online book" || $(this).val() == "Database book"){
+        $(".book_accessed_date").show();
+      }
+      else{
+        $(".book_accessed_date").hide();
+      }
+  });
+  });
+</script>
+
+<%= simple_form_for(@book) do |form| %>
   <% if book.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
@@ -12,13 +60,42 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :book_title %>
+    <%= form.input :title, label: 'Title' %>
   </div>
 
   <div class="field">
     <%= form.label :author %>
-    <%= current_author.email %>
+    <%= current_author.full_name %>
+  </div>
+
+  Need to create a citation for your book? Fill in details below:
+
+  <div class="field">
+    <%= form.input :city, label: 'City' %>
+  </div>
+
+  <div class="field">
+    <%= form.input :publisher, label: 'Publisher' %>
+  </div>
+
+  <div class="field">
+    <%= form.input :year_published, label: 'Year Published', as: :date, start_year: Date.today.year - 90, end_year: Date.today.year, discard_day: true, discard_month: true, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.input :type_of_book, label: 'Type of book', collection: ([['Print', 'Print'], ['Online book', 'Online book'], ['Book from a Database', 'Database book']]) %>
+  </div>
+
+  <div class="field">
+    <%= form.input :website_title, label: 'Website title' %>
+  </div>
+
+  <div class="field">
+    <%= form.input :database_name, label: 'Database name' %>
+  </div>
+
+  <div class="field">
+    <%= form.input :accessed_date, label: 'Date accessed', include_blank: true %>
   </div>
 
   <div class="actions">

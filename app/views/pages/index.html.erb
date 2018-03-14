@@ -1,3 +1,6 @@
 <h1>Welcome to Test bookshelf -- home for all books</h1>
 
 <h1><%= link_to "All Books", books_path %></h1>
+<% if author_signed_in? %>
+	<h1><%= link_to "My Books", books_path(:author_id => current_author.id) %></h1>
+<%end%>
