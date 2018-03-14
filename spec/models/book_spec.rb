@@ -34,7 +34,7 @@ RSpec.describe Book, type: :model do
 		expect(book2.online_citation).to eq("Doe, John. <em>Title two</em>.
 			New York: Big publisher,
 			1993. <em>BigBooks.com.</em>
-			Web. 2018-03-14.")
+			Web. 14 Mar. 2018.")
 	end
 
 	it "creates citation for database book" do
@@ -44,6 +44,6 @@ RSpec.describe Book, type: :model do
 		expect(book3.database_citation).to eq("Doe, John. <em>Title three</em>.
 			New York: Big publisher,
 			1993. <em>BigBooks Database.</em>
-			Web. 2018-03-14.")
+			Web. 14 Mar. 2018.")
 	end
 end

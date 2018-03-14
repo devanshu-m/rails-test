@@ -12,13 +12,13 @@ FactoryGirl.define do
 		factory :online_book do
 			type_of_book 'Online book'
 			website_title 'BigBooks.com'
-			accessed_date '2018-03-14'
+			accessed_date '14 Mar. 2018'
 		end
 
 		factory :database_book do
 			type_of_book 'Database book'
 			database_name 'BigBooks Database'
-			accessed_date '2018-03-14'
+			accessed_date '14 Mar. 2018'
 		end
 	end
 end

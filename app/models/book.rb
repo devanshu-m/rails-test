@@ -26,7 +26,7 @@ class Book < ApplicationRecord
 			"#{author.last_name}, #{author.first_name}. <em>#{title}</em>.
 			#{ city.present? ? "#{city}:" : ""} #{ publisher.present? ? "#{publisher}," : "" }
 			#{ year_published.present? ? "#{year_published.year}." : ""} #{ website_title.present? ? "<em>#{website_title}.</em>" : ""}
-			Web. #{ accessed_date.present? ? "#{accessed_date}." : ""}"
+			Web. #{ accessed_date.present? ? "#{accessed_date.day} #{Date::MONTHNAMES[accessed_date.month].slice(0,3)}. #{accessed_date.year}." : ""}"
 		end
 	end
 
@@ -35,7 +35,7 @@ class Book < ApplicationRecord
 			"#{author.last_name}, #{author.first_name}. <em>#{title}</em>.
 			#{ city.present? ? "#{city}:" : ""} #{ publisher.present? ? "#{publisher}," : "" }
 			#{ year_published.present? ? "#{year_published.year}." : ""} #{ database_name.present? ? "<em>#{database_name}.</em>" : ""}
-			Web. #{ accessed_date.present? ? "#{accessed_date}." : ""}"
+			Web. #{ accessed_date.present? ? "#{accessed_date.day} #{Date::MONTHNAMES[accessed_date.month].slice(0,3)}. #{accessed_date.year}." : ""}"
 		end
 	end
 end
