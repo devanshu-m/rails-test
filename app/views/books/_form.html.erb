@@ -64,8 +64,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :author %>
-    <%= current_author.full_name %>
+    <%= form.association :authors, label: 'Author(s)' %>
   </div>
 
   Need to create a citation for your book? Fill in details below:

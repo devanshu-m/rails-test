@@ -4,8 +4,8 @@
 </p>
 
 <p>
-  <strong>Author:</strong>
-  <%= @book.author.full_name %>
+  <strong>Author(s):</strong>
+  <%= @book.authors.map{|a| a.name}.join(', ') %>
 </p>
 
 <% if @book.print_citation.present? %>

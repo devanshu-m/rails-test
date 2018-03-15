@@ -11,7 +11,7 @@ describe BooksController, type: :controller do
 		end
 
 		describe "GET show" do
-			let(:book) { FactoryBot.create(:book, author: author) }
+			let(:book) { FactoryBot.create(:book, author_ids: [author.id]) }
 
 			it "renders :show template" do
 				get :show, params: { id: book }
@@ -27,7 +27,7 @@ describe BooksController, type: :controller do
 
 	describe "guest user" do
 		let(:author) { FactoryBot.create(:author) }
-		let(:book) { FactoryBot.create(:book, author: author) }
+		let(:book) { FactoryBot.create(:book, author_ids: [author.id]) }
 
 		it_behaves_like "guest view for books"
 
@@ -89,16 +89,16 @@ describe BooksController, type: :controller do
 
 		describe "POST create" do
 			context "valid data" do
-				let(:valid_data) { FactoryBot.attributes_for(:book) }
+				let(:valid_data) { FactoryBot.attributes_for(:book, author_ids: [author.id]) }
 
 				it "redirects to books#show" do
-					post :create, params: { book: valid_data, author_id: author }
+					post :create, params: { book: valid_data }
 					expect(response).to redirect_to(book_path(assigns[:book]))
 				end
 
 				it "creates new book and adds it to database" do
 					expect {
-						post :create, params: { book: valid_data, author_id: author }
+						post :create, params: { book: valid_data }
 					}.to change(Book, :count).by(1)
 				end
 			end
@@ -123,28 +123,28 @@ describe BooksController, type: :controller do
 			let(:author1) { FactoryBot.create(:author, first_name: "Jane") }
 			describe "GET edit" do
 				it "redirects to books page" do
-					get :edit, params: { id: FactoryBot.create(:book, author: author1) }
+					get :edit, params: { id: FactoryBot.create(:book, author_ids: [author1.id]) }
 					expect(response).to redirect_to(books_path)
 				end
 			end
 
 			describe "PUT update" do
 				it "redirects to books page" do
-					put :update, params: { id: FactoryBot.create(:book, author: author1), book: FactoryBot.attributes_for(:book) }
+					put :update, params: { id: FactoryBot.create(:book, author_ids: [author1.id]), book: FactoryBot.attributes_for(:book) }
 					expect(response).to redirect_to(books_path)
 				end
 			end
 
 			describe "DELETE destroy" do
 				it "redirects to books page" do
-					delete :destroy, params: { id: FactoryBot.create(:book, author: author1) }
+					delete :destroy, params: { id: FactoryBot.create(:book, author_ids: [author1.id]) }
 					expect(response).to redirect_to(books_path)
 				end
 			end
 		end
 
 		context "has written the book" do
-			let(:book) { FactoryBot.create(:book, author: author) }
+			let(:book) { FactoryBot.create(:book, author_ids: [author.id]) }
 
 			describe "GET edit" do
 				it "renders :edit template" do
@@ -178,14 +178,14 @@ describe BooksController, type: :controller do
 					let(:invalid_data) { FactoryBot.attributes_for(:book, title: "") }
 
 					it "renders :edit template" do
-						put :update, params: { id: book, book: invalid_data, author: "New author" }
+						put :update, params: { id: book, book: invalid_data, city: "New city" }
 						expect(response).to render_template(:edit)
 					end
 
 					it "does not update assigned book in database" do
-						put :update, params: { id: book, book: invalid_data, author: "New author" }
+						put :update, params: { id: book, book: invalid_data, city: "New city" }
 						book.reload
-						expect(book.author).not_to eq("New author")
+						expect(book.city).not_to eq("New city")
 					end
 				end
 			end

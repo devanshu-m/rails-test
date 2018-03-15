@@ -13,8 +13,7 @@ feature 'create new book' do
 
 	scenario 'with valid data' do
 		new_book_form.visit_page.fill_in_with(
-			title: 'First book title',
-			author_id: author
+			title: 'First book title'
 		).submit
 
 		expect(page).to have_content('Book was successfully created.')

@@ -30,7 +30,7 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = current_author.books.new(book_params)
+    @book = Book.new(book_params)
 
     respond_to do |format|
       if @book.save
@@ -75,12 +75,12 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :city, :publisher, :year_published, :type_of_book, :website_title, :database_name, :accessed_date, :author_id)
+      params.require(:book).permit(:title, :city, :publisher, :year_published, :type_of_book, :website_title, :database_name, :accessed_date, :author_ids => [])
     end
 
     def authors_only
       @book = Book.find(params[:id])
-      if current_author != @book.author
+      if !@book.authors.include?(current_author)
         redirect_to books_path, alert: "You don't have access to this action"
       end
     end
