@@ -21,4 +21,4 @@ This is a rails bookshelf application. Two approaches are implemented in this pr
 
 # Travis build status image
 
-[![Build Status](https://travis-ci.org/devanshu-m/rails-test.svg?branch=master)](https://travis-ci.org/devanshu-m/rails-test)
+[![Build Status](https://travis-ci.org/devanshu-m/rails-app.svg?branch=master)](https://travis-ci.org/devanshu-m/rails-app)
